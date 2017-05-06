@@ -21,7 +21,8 @@ class Application(tornado.web.Application):
             (r'/', HomeHandler),
             (r'/detect', DetectHandler),
             (r'/history', HistoryHandler),
-            (r'/capture', CaptureHandler)
+            (r'/capture', CaptureHandler),
+            (r'/record', RecordHandler)
 
         ]
         settings = dict(
@@ -66,6 +67,11 @@ class CaptureHandler(tornado.web.RequestHandler):
         new_url = random.choice(photo_list)
         # print new_url
         self.write({"new_url": new_url})
+
+class RecordHandler(tornado.web.RequestHandler):
+    def post(self):
+        with open('record.wav', 'w') as f:
+            f.write(self.request.body)
 
 def main():
     http_server = tornado.httpserver.HTTPServer(Application())

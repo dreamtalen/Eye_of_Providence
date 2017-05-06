@@ -82,6 +82,13 @@
 
     // create WAV download link using audio data blob
     createDownloadLink();
+    recorder.exportWAV(function(audio) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/record', true);
+    xhr.setRequestHeader("content-type", "audio/wav");
+    xhr.onload = function(e) {};
+    xhr.send(audio);
+    });
 
     recorder.clear();
   }
