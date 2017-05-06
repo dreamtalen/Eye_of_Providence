@@ -11,12 +11,20 @@
     <link href="{{static_url('main.css')}}" rel="stylesheet">
 </head>
 <body>
-  <div class="ui left vertical inverted sidebar labeled icon menu" id="sidebar"></div>
-
+  <div class="ui left vertical inverted sidebar labeled icon menu" id="sidebar">
+    <a class="item" href="/">
+      <i class="home icon"></i>
+      主页
+    </a>
+    <a class="item" href="/history">
+      <i class="calendar icon"></i>
+      历史
+    </a>
+  </div>
     <div class="pusher">
       <div class="header">
-        <button class="ui button" id="doc_bar" onclick="sidebar()" data-tooltip="历史记录" data-position="bottom" data-inverted=""><i class="book icon"></i></button>
-        supervisor
+        <button class="ui button" id="doc_bar" onclick="sidebar()" data-tooltip="Sidebar" data-position="bottom" data-inverted=""><i class="book icon"></i></button>
+        Eye of Providence
       </div>
 
       <div class="monitor">

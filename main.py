@@ -35,12 +35,15 @@ class Application(tornado.web.Application):
 
 class HomeHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render('home.html', title='eyes', content='hiiiiii')
+        self.render('home.html', title='Eye of Providence', content='')
 
 
 class HistoryHandler(tornado.web.RequestHandler):
     def get(self):
-        pass
+        data = db.query("SELECT * FROM log")
+        time_list = [d['ts'] for d in data]
+        names_list = [d['names'] for d in data]
+        self.render('history.html', title='Eye of Providence', content='', time_list=time_list, names_list=names_list)
 
 
 class DetectHandler(tornado.web.RequestHandler):
