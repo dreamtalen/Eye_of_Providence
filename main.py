@@ -42,11 +42,12 @@ class DetectHandler(tornado.web.RequestHandler):
         # print face_id_emotion_dict, face_id_eye_open_dict
         eye_close_id_list = [id for id in face_id_eye_open_dict.keys() if not face_id_eye_open_dict[id]]
         # print eye_close_id_list
+        sleep_ones = []
         for id in eye_close_id_list:
             for known_face_id in face_id_name_dict.keys():
                 if verification.verification(id, known_face_id):
-                    print face_id_name_dict[known_face_id]
-        self.write("ok")
+                    sleep_ones.append(face_id_name_dict[known_face_id])
+        self.write({"id": sleep_ones})
 
 
 def main():
