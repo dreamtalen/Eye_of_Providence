@@ -3,11 +3,16 @@ import os
 import tornado
 import tornado.web
 import tornado.httpserver
+import torndb
 
 import detection
 import verification
 
 face_id_name_dict = {"10db487ca3f04ce1b886a9b314458e1a":"Zhang", "af023ebaa7b14131b728a624d337b55d":"Ding", "bcf2a592846d4a03aa9e1dadc7aa7381":"Luo"}
+
+db = torndb.Connection(host='127.0.0.1:3306', database='monitor', user='root', password='123456')
+
+
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
@@ -47,6 +52,7 @@ class DetectHandler(tornado.web.RequestHandler):
             for known_face_id in face_id_name_dict.keys():
                 if verification.verification(id, known_face_id):
                     sleep_ones.append(face_id_name_dict[known_face_id])
+        db.execute("""INSERT INTO log(ts, names) VALUES(UTC_TIMESTAMP, %s)""", ",".join(sleep_ones))
         self.write({"id": sleep_ones})
 
 
