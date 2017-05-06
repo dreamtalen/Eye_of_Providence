@@ -8,6 +8,7 @@ import torndb
 
 import detection
 import verification
+import voice
 
 face_id_name_dict = {"10db487ca3f04ce1b886a9b314458e1a":"Zhang", "af023ebaa7b14131b728a624d337b55d":"Ding", "bcf2a592846d4a03aa9e1dadc7aa7381":"Luo"}
 photo_list = ["https://ooo.0o0.ooo/2017/05/06/590d424294629.png", "https://ooo.0o0.ooo/2017/05/06/590d4b2be7f5f.jpeg",
@@ -80,7 +81,9 @@ class RecordHandler(tornado.web.RequestHandler):
 class AnalyzeHandler(tornado.web.RequestHandler):
     def post(self):
         # record_result = 'find sleeping students'
-        record_result = 'find slee students'
+        print 'begin'
+        record_result = voice.Voice2Text('record.wav')
+        print record_result
         if 'sleep' in record_result:
             url = self.request.body
             face_id_emotion_dict, face_id_eye_open_dict = detection.detection(url)
