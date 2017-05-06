@@ -22,9 +22,15 @@
       <div class="monitor">
         <div class="left-part" id="container"><img id="pic" src="https://ooo.0o0.ooo/2017/05/06/590d4b2be7f5f.jpeg">
         </div>
-        <div class="right-part">button area<br/>
-          <button onclick="startRecording(this);">开始录音</button>
-          <button onclick="stopRecording(this);" disabled>停止录音</button>
+        <div class="right-part"><br />
+          <button class="ui labeled icon button" onclick="startRecording(this);">
+            <i class="record icon"></i>
+            开始录音
+          </button>
+          <button class="ui labeled icon button" onclick="stopRecording(this);" disabled>
+            <i class="stop icon"></i>
+            停止录音
+          </button>
           <h4>录音文件</h4>
           <ul id="recordingslist"></ul>
 
@@ -32,9 +38,8 @@
           <pre id="log"></pre>
           <div class="marg10" id="sleep" style="color: red; display:none;"></div>
           <div class="marg10"><button class="ui black basic button" onclick="capturePhoto()">capture new photo</button></div>
-          <div class="marg10"><button class="ui black basic button">拍照</button></div>
           <div class="marg10"><button class="ui red basic button" onclick="findSleep()"> find sleep ones</button></div>
-          <div class="marg10"><button class="ui teal basic button"> record voices</button></div>
+          <!--<div class="marg10"><button class="ui teal basic button"> record voices</button></div>-->
           <div class="marg10"><button class="ui blue basic button"> alert someone</button></div>
         </div>
       </div>

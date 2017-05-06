@@ -15,7 +15,6 @@ photo_list = ["https://ooo.0o0.ooo/2017/05/06/590d424294629.png", "https://ooo.0
 
 db = torndb.Connection(host='127.0.0.1:3306', database='monitor', user='root', password='123456')
 
-
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
