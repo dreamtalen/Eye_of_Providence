@@ -5,8 +5,9 @@ import tornado.web
 import tornado.httpserver
 
 import detection
+import verification
 
-
+face_id_name_dict = {"10db487ca3f04ce1b886a9b314458e1a":"Zhang", "af023ebaa7b14131b728a624d337b55d":"Ding", "bcf2a592846d4a03aa9e1dadc7aa7381":"Luo"}
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
@@ -38,7 +39,13 @@ class DetectHandler(tornado.web.RequestHandler):
     def post(self):
         url = self.request.body
         face_id_emotion_dict, face_id_eye_open_dict = detection.detection(url)
-        print face_id_emotion_dict, face_id_eye_open_dict
+        # print face_id_emotion_dict, face_id_eye_open_dict
+        eye_close_id_list = [id for id in face_id_eye_open_dict.keys() if not face_id_eye_open_dict[id]]
+        # print eye_close_id_list
+        for id in eye_close_id_list:
+            for known_face_id in face_id_name_dict.keys():
+                if verification.verification(id, known_face_id):
+                    print face_id_name_dict[known_face_id]
         self.write("ok")
 
 
