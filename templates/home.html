@@ -47,7 +47,7 @@
           <div class="marg10" id="sleep" style="color: red; display:none;"></div>
           <div class="marg10"><button class="ui black basic button" onclick="capturePhoto()">capture new photo</button></div>
           <div class="marg10"><button class="ui red basic button" onclick="findSleep()"> find sleep ones</button></div>
-          <!--<div class="marg10"><button class="ui teal basic button"> record voices</button></div>-->
+          <div class="marg10"><button class="ui teal basic button" onclick="analyzeRecord()"> record analyze</button></div>
           <div class="marg10"><button class="ui blue basic button"> alert someone</button></div>
         </div>
       </div>
@@ -86,10 +86,11 @@
     var xhr = new XMLHttpRequest();
     xhr.open("POST", '/record', true);
     xhr.setRequestHeader("content-type", "audio/wav");
+    xhr.setRequestHeader("image_url", $("#pic").attr('src'));
     xhr.onload = function(e) {};
     xhr.send(audio);
     });
-
+    findSleep();
     recorder.clear();
   }
   function createDownloadLink() {

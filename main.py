@@ -22,7 +22,8 @@ class Application(tornado.web.Application):
             (r'/detect', DetectHandler),
             (r'/history', HistoryHandler),
             (r'/capture', CaptureHandler),
-            (r'/record', RecordHandler)
+            (r'/record', RecordHandler),
+            (r'/analyze', AnalyzeHandler)
 
         ]
         settings = dict(
@@ -70,8 +71,32 @@ class CaptureHandler(tornado.web.RequestHandler):
 
 class RecordHandler(tornado.web.RequestHandler):
     def post(self):
+        url =  self.request.headers['image_url']
         with open('record.wav', 'w') as f:
             f.write(self.request.body)
+        result = 'find sleeping students'
+        # if 'sleep' in result:
+
+class AnalyzeHandler(tornado.web.RequestHandler):
+    def post(self):
+        # record_result = 'find sleeping students'
+        record_result = 'find slee students'
+        if 'sleep' in record_result:
+            url = self.request.body
+            face_id_emotion_dict, face_id_eye_open_dict = detection.detection(url)
+            # print face_id_emotion_dict, face_id_eye_open_dict
+            eye_close_id_list = [id for id in face_id_eye_open_dict.keys() if not face_id_eye_open_dict[id]]
+            # print eye_close_id_list
+            sleep_ones = []
+            for id in eye_close_id_list:
+                for known_face_id in face_id_name_dict.keys():
+                    if verification.verification(id, known_face_id):
+                        sleep_ones.append(face_id_name_dict[known_face_id])
+            db.execute("""INSERT INTO log(ts, names) VALUES(UTC_TIMESTAMP, %s)""", ",".join(sleep_ones))
+            self.write({"id": sleep_ones})
+        else:
+            self.write({"id": []})
+
 
 def main():
     http_server = tornado.httpserver.HTTPServer(Application())

@@ -1,7 +1,21 @@
 function sidebar() {
     $('.ui.labeled.icon.sidebar').sidebar('toggle');
 }
+function analyzeRecord() {
 
+    $.ajax({
+        type: 'POST',
+        url: '/analyze',
+        data: $("#pic").attr('src'),
+        contentType: 'text/plain',
+        success: function(data) {
+            $("#sleep").html("睡觉学生： ");
+            $("#sleep").show();
+            for(var i=0; i<data['id'].length; i++)
+                $("#sleep").append(data['id'][i]);
+        }
+    });
+}
 function findSleep() {
 
     $.ajax({
