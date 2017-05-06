@@ -1,0 +1,10 @@
+.header {height: 70px; border-bottom: 1px solid #008C79;}
+.left-part {position:absolute; top: 15%; left: 10%; height: 500px; width: 50%;}
+.right-part {position:absolute; top: 15%; right: 10%; border: 1px solid grey; height: 500px; width: 25%;}
+#container {height: 500px; width: 50%;}
+#container img { width: 100%;}
+.marg10 {margin: 10px;}
+
+.ui.button {background-color: transparent;}
+.ui.button:hover {background-color: transparent; border: 1px solid #CACBCD;}
+#sidebar {width: 300px; overflow-y:scroll;}
