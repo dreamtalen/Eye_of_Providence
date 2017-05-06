@@ -3,17 +3,21 @@ import os
 import tornado
 import tornado.web
 import tornado.httpserver
-
+import random
 import detection
 import verification
 
 face_id_name_dict = {"10db487ca3f04ce1b886a9b314458e1a":"Zhang", "af023ebaa7b14131b728a624d337b55d":"Ding", "bcf2a592846d4a03aa9e1dadc7aa7381":"Luo"}
+photo_list = ["https://ooo.0o0.ooo/2017/05/06/590d424294629.png", "https://ooo.0o0.ooo/2017/05/06/590d4b2be7f5f.jpeg",
+              "https://ooo.0o0.ooo/2017/05/06/590d38b18507f.jpeg","https://ooo.0o0.ooo/2017/05/06/590d767456f4f.jpg"]
+
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r'/', HomeHandler),
             (r'/detect', DetectHandler),
-            (r'/history', HistoryHandler)
+            (r'/history', HistoryHandler),
+            (r'/capture', CaptureHandler)
 
         ]
         settings = dict(
@@ -49,6 +53,11 @@ class DetectHandler(tornado.web.RequestHandler):
                     sleep_ones.append(face_id_name_dict[known_face_id])
         self.write({"id": sleep_ones})
 
+class CaptureHandler(tornado.web.RequestHandler):
+    def post(self):
+        new_url = random.choice(photo_list)
+        # print new_url
+        self.write({"new_url": new_url})
 
 def main():
     http_server = tornado.httpserver.HTTPServer(Application())

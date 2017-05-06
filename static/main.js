@@ -18,7 +18,17 @@ function findSleep() {
     });
 }
 
+function capturePhoto() {
 
+    $.ajax({
+        type: 'POST',
+        url: '/capture',
+        success: function(data) {
+            new_url = data['new_url'];
+            $("#pic").attr('src', new_url);
+        }
+    });
+}
 $(document).ready(function() {
     (function() {
     var img = document.getElementById('container').firstChild;
