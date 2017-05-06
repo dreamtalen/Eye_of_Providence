@@ -13,7 +13,6 @@ class Application(tornado.web.Application):
 
         ]
         settings = dict(
-            editor_title=" ",
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
             xsrf_cookies=False,

@@ -7,3 +7,4 @@
 
 .ui.button {background-color: transparent;}
 .ui.button:hover {background-color: transparent; border: 1px solid #CACBCD;}
+#sidebar {width: 300px; overflow-y:scroll;}
