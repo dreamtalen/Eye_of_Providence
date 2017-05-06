@@ -10,7 +10,21 @@ $(document).ready(function() {
             img.height = '100%';
             img.width = 'auto';
         }
+
     };
     }());
+
+    $.ajax({
+        type: 'POST',
+        url: '/detect',
+        data: $("#pic").attr('src'),
+        contentType: 'text/plain',
+        success: function(data) {
+            console.log(data);
+        }
+
+    });
+
+
 
 });

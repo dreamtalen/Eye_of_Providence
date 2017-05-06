@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
+import os
 import tornado
 import tornado.web
 import tornado.httpserver
-import os
+
+import detection
 
 
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r'/', HomeHandler),
+            (r'/detect', DetectHandler),
             (r'/history', HistoryHandler)
 
         ]
@@ -29,6 +32,14 @@ class HomeHandler(tornado.web.RequestHandler):
 class HistoryHandler(tornado.web.RequestHandler):
     def get(self):
         pass
+
+
+class DetectHandler(tornado.web.RequestHandler):
+    def post(self):
+        url = self.request.body
+        face_id_emotion_dict, face_id_eye_open_dict = detection.detection(url)
+        print face_id_emotion_dict, face_id_eye_open_dict
+        self.write("ok")
 
 
 def main():
