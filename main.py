@@ -12,7 +12,11 @@ import voice
 
 face_id_name_dict = {"10db487ca3f04ce1b886a9b314458e1a":"Zhang", "af023ebaa7b14131b728a624d337b55d":"Ding", "bcf2a592846d4a03aa9e1dadc7aa7381":"Luo"}
 photo_list = ["https://ooo.0o0.ooo/2017/05/06/590d424294629.png", "https://ooo.0o0.ooo/2017/05/06/590d4b2be7f5f.jpeg",
-              "https://ooo.0o0.ooo/2017/05/06/590d38b18507f.jpeg","https://ooo.0o0.ooo/2017/05/06/590d767456f4f.jpg"]
+              "https://ooo.0o0.ooo/2017/05/06/590d38b18507f.jpeg","https://ooo.0o0.ooo/2017/05/06/590d767456f4f.jpg",
+              "https://ooo.0o0.ooo/2017/05/07/590e9342b328d.png",
+                "https://ooo.0o0.ooo/2017/05/07/590e93437755a.png",
+                "https://ooo.0o0.ooo/2017/05/07/590e93437d9d3.png",
+                "https://ooo.0o0.ooo/2017/05/07/590e934381e86.png"]
 
 db = torndb.Connection(host='127.0.0.1:3306', database='monitor', user='root', password='123456')
 Order_list=[]
