@@ -9,10 +9,19 @@ function analyzeRecord() {
         data: $("#pic").attr('src'),
         contentType: 'text/plain',
         success: function(data) {
-            $("#sleep").html("睡觉学生： ");
-            $("#sleep").show();
-            for(var i=0; i<data['id'].length; i++)
-                $("#sleep").append(data['id'][i]);
+            if(data['flag'] == '1'){
+                $("#record").html(data['analyze_result']);
+                $("#record").show();
+                $("#sleep").html("睡觉学生： ");
+                $("#sleep").show();
+                for(var i=0; i<data['id'].length; i++)
+                    $("#sleep").append(data['id'][i]);
+            }
+            else{
+                $("#record").html(data['analyze_result']);
+                $("#record").show();
+            }
+
         }
     });
 }
@@ -26,6 +35,9 @@ function findSleep() {
         success: function(data) {
             $("#sleep").html("睡觉学生： ");
             $("#sleep").show();
+            if(data['id'].length == 0){
+                $("#sleep").append("None");
+            }
             for(var i=0; i<data['id'].length; i++)
                 $("#sleep").append(data['id'][i]);
         }

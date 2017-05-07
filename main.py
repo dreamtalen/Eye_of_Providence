@@ -96,9 +96,9 @@ class AnalyzeHandler(tornado.web.RequestHandler):
                     if verification.verification(id, known_face_id):
                         sleep_ones.append(face_id_name_dict[known_face_id])
             db.execute("""INSERT INTO log(ts, names) VALUES(UTC_TIMESTAMP, %s)""", ",".join(sleep_ones))
-            self.write({"id": sleep_ones})
+            self.write({"id": sleep_ones, "analyze_result": record_result, "flag": '1'})
         else:
-            self.write({"id": []})
+            self.write({"id": [], "analyze_result": record_result, "flag":'0'})
 
 
 def main():
