@@ -15,6 +15,23 @@ photo_list = ["https://ooo.0o0.ooo/2017/05/06/590d424294629.png", "https://ooo.0
               "https://ooo.0o0.ooo/2017/05/06/590d38b18507f.jpeg","https://ooo.0o0.ooo/2017/05/06/590d767456f4f.jpg"]
 
 db = torndb.Connection(host='127.0.0.1:3306', database='monitor', user='root', password='123456')
+Order_list=[]
+def Add_Order(decorated):
+    """
+    装饰器，作callback用
+    :param decorated:
+    :return:
+    """
+    Order_list.append(decorated)
+    return decorated
+
+@Add_Order
+def Order_Sleep(text):
+    if 'sleep' not in text:
+        return False
+    ###DO SOMETHING
+    return True
+
 
 class Application(tornado.web.Application):
     def __init__(self):
